@@ -26,10 +26,10 @@
                 <th scope="col">Brand</th>
                 <th scope="col">Description</th>
                 <th scope="col">Image</th>
-                <th scope="col">Status</th>
-                <th scope="col">Manage</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
+                <th scope="col">Status</th>
+                <th scope="col">Manage</th>
             </tr>
         </thead>
         <tbody>

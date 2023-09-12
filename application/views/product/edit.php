@@ -13,7 +13,7 @@
     <?php   
         }elseif($this->session->flashdata('error')){
     ?>
-    <div class="alert alert-danger"><?php echo $this->session->flashdata('error');?></div>
+    <div class="alert alert-danger"><?php echo $this->seproductssion->flashdata('error');?></div>
     <?php
         }
     ?>

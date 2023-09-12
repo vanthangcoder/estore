@@ -1,5 +1,11 @@
 	
 	<section>
+		<style>
+			button.btn.btn-fefault.cart_home{
+				margin-bottom: 25px;
+				background: #FE980F;
+			}
+		</style>
 		<div class="container">
 			<div class="row">
 				<?php $this->load->view('pages/template/sidebar');?>	
@@ -22,7 +28,7 @@
 											<h2><?php echo number_format($pro->price,0,',','.') ?>vnd</h2>
 											<p> <?php echo $pro->title ?></p>
                                             <a href="<?php echo base_url('san-pham/'.$pro->id.'/'.$pro->slug)?>" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i>Detail</a>
-											<button type="submit" class="btn btn-fefault cart">
+											<button type="submit" class="btn btn-fefault cart cart_home">
 												<i class="fa fa-shopping-cart"></i>
 												Add to cart
 											</button>

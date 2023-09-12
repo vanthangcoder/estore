@@ -7,45 +7,66 @@ class IndexController extends CI_Controller {
 		parent::__construct();
 		$this->load->model('IndexModel');
 		$this->load->library('cart');
+		$this->load->library('email');
 		$this->data['category'] = $this->IndexModel->getCategoryHome();
 		$this->data['brand'] = $this->IndexModel->getBrandHome();
 		
 	}
 
+	// public function send_mail(){
+	// 	$config = array();
+	// 	$config['protocol'] = 'smtp';
+	// 	$config['smtp_host'] = 'ssl://smtp.gmail.com';
+	// 	$config['smtp_user'] = 'demoemail8088@gmail.com';
+	// 	$config['smtp_pass'] = 'jsbhvyabjpwpomwu';          //jsbhvyabjpwpomwu
+	// 	$config['smtp_port'] = '456';
+	// 	$config['charset'] = 'utf-8';
+	// 	$this->email->initialize($config);
+	// 	$this->email->set_newline("\r\n");
+	// 	//config email
+	// 	$this->email->from('demoemail8088@gmail.com', 'mail demo');
+	// 	$this->email->to('demoemail8088@gmail.com');
+	// 	// $this->email->cc('another@another-example.com');//gui 1 ban copy cho 1 hoac nhieu nguoi
+	// 	// $this->email->bcc('them@their-example.com');//gui 1 ban copy cho 1 hoac nhieu nguoi| se ko thay thong tin nguoi gui nguoi nhan
+
+	// 	$this->email->subject('Email Test');
+	// 	$this->email->message('Testing the email class.');
+	// 	$this->email->send();
+
+	// }
 	public function index()
 	{
 
 		//custom config link
-		$config = array();
-        $config["base_url"] = base_url() .'/phan-trang'; 
-		$config['total_rows'] = ceil($this->IndexModel->countAllProduct()); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
-		$config["per_page"] = 3; //từng trang 3 sản phẩn
-        $config["uri_segment"] = 2; //lấy số trang hiện tại
-		$config['use_page_numbers'] = TRUE; //trang có số
-		$config['full_tag_open'] = '<ul class="pagination">';
-		$config['full_tag_close'] = '</ul>';
-		$config['first_link'] = 'First';
-		$config['first_tag_open'] = '<li>';
-		$config['first_tag_close'] = '</li>';
-		$config['last_link'] = 'Last';
-		$config['last_tag_open'] = '<li>';
-		$config['last_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li class="active"><a>';
-		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['next_tag_open'] = '<li>';
-		$config['next_tag_close'] = '</li>';
-		$config['prev_tag_open'] = '<li>';
-		$config['prev_tag_close'] = '</li>';
-		//end custom config link
-		$this->pagination->initialize($config); //tự động tạo trang
-		$this->page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0; //current page active 
-		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
-		$this->data['allproduct_pagination'] = $this->IndexModel->getIndexPagination($config["per_page"], $this->page);
+		// $config = array();
+        // $config["base_url"] = base_url() .'/phan-trang'; 
+		// $config['total_rows'] = ceil($this->IndexModel->countAllProduct()); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
+		// $config["per_page"] = 6; //từng trang 3 sản phẩn
+        // $config["uri_segment"] = 2; //lấy số trang hiện tại
+		// $config['use_page_numbers'] = TRUE; //trang có số
+		// $config['full_tag_open'] = '<ul class="pagination">';
+		// $config['full_tag_close'] = '</ul>';
+		// $config['first_link'] = 'First';
+		// $config['first_tag_open'] = '<li>';
+		// $config['first_tag_close'] = '</li>';
+		// $config['last_link'] = 'Last';
+		// $config['last_tag_open'] = '<li>';
+		// $config['last_tag_close'] = '</li>';
+		// $config['cur_tag_open'] = '<li class="active"><a>';
+		// $config['cur_tag_close'] = '</a></li>';
+		// $config['num_tag_open'] = '<li>';
+		// $config['num_tag_close'] = '</li>';
+		// $config['next_tag_open'] = '<li>';
+		// $config['next_tag_close'] = '</li>';
+		// $config['prev_tag_open'] = '<li>';
+		// $config['prev_tag_close'] = '</li>';
+		// //end custom config link
+		// $this->pagination->initialize($config); //tự động tạo trang
+		// $this->page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0; //current page active 
+		// $this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
+		// $this->data['allproduct_pagination'] = $this->IndexModel->getIndexPagination($config["per_page"], $this->page);
 		//pagination
-
-		// $this->data['allproduct'] = $this->IndexModel->getAllProduct();
+		$this->data['allproduct'] = $this->IndexModel->getAllProduct();
 		
 		$this->load->view('pages/template/header',$this->data);
 		$this->load->view('pages/template/slider');
@@ -60,7 +81,7 @@ class IndexController extends CI_Controller {
 		$config = array();
         $config["base_url"] = base_url() .'/danh-muc'.'/'.$id.'/'.$this->data['slug']; 
 		$config['total_rows'] = ceil($this->IndexModel->countAllProductByCate($id)); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
-		$config["per_page"] = 3; //từng trang 3 sản phẩn
+		$config["per_page"] = 9; //từng trang 3 sản phẩn
         $config["uri_segment"] = 4; //lấy số trang hiện tại
 		$config['use_page_numbers'] = TRUE; //trang có số
 		$config['full_tag_open'] = '<ul class="pagination">';
@@ -81,7 +102,7 @@ class IndexController extends CI_Controller {
 		$config['prev_tag_close'] = '</li>';
 		//end custom config link
 		$this->pagination->initialize($config); //tự động tạo trang
-		$this->page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0; //current page active 
+		$this->page = ($this->uri->segment(10)) ? $this->uri->segment(10) : 0; //current page active 
 		$this->data["links"] = $this->pagination->create_links(); //tự động tạo links phân trang dựa vào trang hiện tại
 		$this->data['allproductbycate_pagination'] = $this->IndexModel->getCatePagination($id,$config["per_page"], $this->page);
 		//pagination
@@ -102,7 +123,7 @@ class IndexController extends CI_Controller {
 		$config = array();
         $config["base_url"] = base_url() .'/thuong-hieu'.'/'.$id.'/'.$this->data['slug']; 
 		$config['total_rows'] = ceil($this->IndexModel->countAllProductByBrand($id)); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
-		$config["per_page"] = 3; //từng trang 3 sản phẩn
+		$config["per_page"] = 9; //từng trang 3 sản phẩn
         $config["uri_segment"] = 4; //lấy số trang hiện tại
 		$config['use_page_numbers'] = TRUE; //trang có số
 		$config['full_tag_open'] = '<ul class="pagination">';
@@ -380,7 +401,7 @@ class IndexController extends CI_Controller {
         $config["base_url"] = base_url() .'/tim-kiem'; 
 		$config['reuse_query_string'] = TRUE;
 		$config['total_rows'] = ceil($this->IndexModel->countAllProductByKeyword($keyword)); //đếm tất cả sản phẩm //8 //hàm ceil làm tròn phân trang 
-		$config["per_page"] = 3; //từng trang 3 sản phẩn
+		$config["per_page"] = 9; //từng trang 3 sản phẩn
         $config["uri_segment"] = 2; //lấy số trang hiện tại
 		$config['use_page_numbers'] = TRUE; //trang có số
 		$config['full_tag_open'] = '<ul class="pagination">';

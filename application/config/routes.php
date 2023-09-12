@@ -24,11 +24,14 @@ $route['thanks']['GET'] = 'IndexController/thanks';
 $route['tim-kiem']['GET'] = 'IndexController/tim_kiem';
 
 //pagination
-$route['phan-trang/index/(:num)']= 'IndexController/index/$1';
-$route['phan-trang/index']= 'IndexController/index';
+$route['phan-trang/(:num)']= 'IndexController/index/$1';
+$route['phan-trang']= 'IndexController/index';// 
 $route['danh-muc/(:any)/(:any)/(:any)']['GET'] = 'IndexController/category/$1/$2/$3';
 $route['thuong-hieu/(:any)/(:any)/(:any)']['GET'] = 'IndexController/brand/$1/$2/3';
 $route['tim-kiem/(:num)']['GET'] = 'IndexController/tim_kiem/$1';
+
+//Email
+$route['test-mail']['GET'] = 'IndexController/send_mail';
 //login
 $route['login']['GET'] = 'LoginController/index';
 $route['login-user']['POST'] = 'LoginController/login';

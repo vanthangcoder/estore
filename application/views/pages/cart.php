@@ -1,5 +1,7 @@
 <section id="cart_items">
+
 		<div class="container">
+
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="#">Home</a></li>
@@ -14,8 +16,8 @@
 					<thead>
 						<tr class="cart_menu" >
 							
-							<td class="description">Image</td>
-                            <td class="image">Item</td>
+							<td class="image">Image</td>
+                            <td class="description" style="text-align:center;">Item</td>
 							<td class="price">Price</td>
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
@@ -33,11 +35,11 @@
                             $total+=$subtotal;
                         ?>
 						<tr >
-							<td class="cart_product">
+							<td class="cart_product ">
 								<a href=""><img src="<?php echo base_url('uploads/product/'.$items['options']['image'])?>" width="100" height="100" alt="<?php echo $items['name']?>"></a>
 							</td>
-							<td class="cart_description" >
-								<h4 style="text-align:center"><a href=""><?php echo $items['name']?></a></h4>
+							<td class="cart_description " >
+								<h4 style="text-align:center;"><a href=""><?php echo $items['name']?></a></h4>
 								
 							</td>
 							<td class="cart_price">
